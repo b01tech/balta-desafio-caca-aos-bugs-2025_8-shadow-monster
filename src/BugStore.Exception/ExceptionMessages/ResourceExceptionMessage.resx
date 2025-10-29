@@ -120,6 +120,9 @@
   <data name="PRICE_NEGATIVE" xml:space="preserve">
     <value>Price cannot be negative</value>
   </data>
+  <data name="PRODUCT_DUPLICATED" xml:space="preserve">
+    <value>Product already added to order</value>
+  </data>
   <data name="QUANTITY_INVALID" xml:space="preserve">
     <value>Quantity must be greater than zero</value>
   </data>

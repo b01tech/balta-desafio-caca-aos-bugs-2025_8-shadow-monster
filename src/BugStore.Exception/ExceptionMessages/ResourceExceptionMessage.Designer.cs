@@ -70,6 +70,15 @@ namespace BugStore.Exception.ExceptionMessages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product already added to order.
+        /// </summary>
+        public static string PRODUCT_DUPLICATED {
+            get {
+                return ResourceManager.GetString("PRODUCT_DUPLICATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quantity must be greater than zero.
         /// </summary>
         public static string QUANTITY_INVALID {
