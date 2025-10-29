@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BugStore.Exception\BugStore.Exception.csproj" />
     <ProjectReference Include="..\..\src\BugStore.Infra\BugStore.Infra.csproj" />
+    <ProjectReference Include="..\BugStore.TestUtilities\BugStore.TestUtilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
