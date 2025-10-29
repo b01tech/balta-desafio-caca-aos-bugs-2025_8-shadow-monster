@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugStore.Application.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugStore.Infra.Tests", "test\BugStore.Infra.Tests\BugStore.Infra.Tests.csproj", "{6A3C0511-734F-47EB-9859-14F9A90D5E87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugStore.TestUtilities", "test\BugStore.TestUtilities\BugStore.TestUtilities.csproj", "{C60E2C16-FAAD-4FA3-A6E5-94FCF063D5A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{6A3C0511-734F-47EB-9859-14F9A90D5E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A3C0511-734F-47EB-9859-14F9A90D5E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A3C0511-734F-47EB-9859-14F9A90D5E87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C60E2C16-FAAD-4FA3-A6E5-94FCF063D5A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C60E2C16-FAAD-4FA3-A6E5-94FCF063D5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C60E2C16-FAAD-4FA3-A6E5-94FCF063D5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C60E2C16-FAAD-4FA3-A6E5-94FCF063D5A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{1840F6A1-1472-462C-8DDA-D02961C29747} = {0C88DD14-F956-CE84-757C-A364CCF449FC}
 		{7AEFEDFC-930A-4D11-A25A-CDE56260122F} = {0C88DD14-F956-CE84-757C-A364CCF449FC}
 		{6A3C0511-734F-47EB-9859-14F9A90D5E87} = {0C88DD14-F956-CE84-757C-A364CCF449FC}
+		{C60E2C16-FAAD-4FA3-A6E5-94FCF063D5A9} = {0C88DD14-F956-CE84-757C-A364CCF449FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78AFD41C-42B6-4BB3-9FA6-C7875E25C489}
