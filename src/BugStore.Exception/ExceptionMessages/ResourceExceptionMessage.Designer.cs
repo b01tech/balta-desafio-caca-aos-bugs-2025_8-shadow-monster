@@ -68,5 +68,14 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("PRICE_NEGATIVE", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity must be greater than zero.
+        /// </summary>
+        public static string QUANTITY_INVALID {
+            get {
+                return ResourceManager.GetString("QUANTITY_INVALID", resourceCulture);
+            }
+        }
     }
 }
