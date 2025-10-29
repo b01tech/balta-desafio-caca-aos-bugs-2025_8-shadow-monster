@@ -1,4 +1,6 @@
 using BugStore.Infra.Extensions;
+DotNetEnv.Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
