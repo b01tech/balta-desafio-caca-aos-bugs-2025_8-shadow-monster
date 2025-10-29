@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BugStore.Domain\BugStore.Domain.csproj" />
     <ProjectReference Include="..\..\src\BugStore.Exception\BugStore.Exception.csproj" />
+    <ProjectReference Include="..\BugStore.TestUtilities\BugStore.TestUtilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
