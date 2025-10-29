@@ -1,0 +1,6 @@
+@BugStore.API_HostAddress = http://localhost:5105
+
+GET {{BugStore.API_HostAddress}}/
+Accept: application/json
+
+###
