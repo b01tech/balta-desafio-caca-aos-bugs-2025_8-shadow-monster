@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="BugStore.Infra.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BugStore.Domain\BugStore.Domain.csproj" />
     <ProjectReference Include="..\BugStore.Exception\BugStore.Exception.csproj" />
   </ItemGroup>
