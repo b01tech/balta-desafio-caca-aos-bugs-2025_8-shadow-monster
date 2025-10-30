@@ -1,5 +1,6 @@
 using BugStore.Application.Product.Commands;
 using BugStore.Application.Product.DTOs;
+using BugStore.Application.Product.Queries;
 using BugStore.Application.Services.Mediator;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,23 @@ namespace BugStore.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            return Ok();
+            var query = new GetProductByIdQuery(id);
+            var response = await _mediator.SendAsync<
+                GetProductByIdQuery,
+                ResponseProductDetailedDTO
+            >(query);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllAsync([FromQuery] int page = 1, int pageSize = 10)
+        {
+            var query = new GetProductListQuery(page, pageSize);
+            var response = await _mediator.SendAsync<GetProductListQuery, ResponseListProductDTO>(
+                query
+            );
+            return Ok(response);
         }
 
         [HttpPost]
