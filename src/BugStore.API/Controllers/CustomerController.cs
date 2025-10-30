@@ -1,3 +1,6 @@
+using BugStore.Application.Customer.Commands;
+using BugStore.Application.Customer.DTOs;
+using BugStore.Application.Services.Mediator;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BugStore.API.Controllers;
@@ -5,6 +8,13 @@ namespace BugStore.API.Controllers;
 [ApiController]
 public class CustomerController : ControllerBase
 {
+    private readonly IMediatorService _mediator;
+
+    public CustomerController(IMediatorService mediator)
+    {
+        _mediator = mediator;
+    }
+
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -23,9 +33,11 @@ public class CustomerController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult Create([FromBody] object customerDto)
+    public async Task<IActionResult> Create([FromBody] RequestCustomerDTO request)
     {
-        return Created("", "Endpoint works.");
+        var command = new AddCustomerCommand(request);
+        var response = await _mediator.SendAsync<AddCustomerCommand, ResponseDataCustomerDTO>(command);
+        return Created("",response);
     }
 
     [HttpPut("{id}")]
