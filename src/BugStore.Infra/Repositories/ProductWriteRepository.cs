@@ -4,17 +4,20 @@ using BugStore.Infra.Data;
 
 namespace BugStore.Infra.Repositories
 {
-    public class ProductWriteRepository : IProductWriteRepository
+    internal class ProductWriteRepository : IProductWriteRepository
     {
         private readonly BugStoreDbContext _dbContext;
+
         public ProductWriteRepository(BugStoreDbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         public async Task AddAsync(Product product)
         {
             await _dbContext.Products.AddAsync(product);
         }
+
         public async Task UpdateAsync(Product product)
         {
             _dbContext.Products.Update(product);
