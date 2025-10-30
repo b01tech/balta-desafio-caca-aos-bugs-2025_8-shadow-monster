@@ -22,9 +22,24 @@ public class Product
         Price = price;
     }
 
+    public void Update(string title, string description, string slug, decimal price)
+    {
+        ValidatePrice(price);
+        Title = title;
+        Description = description;
+        Slug = slug;
+        Price = price;
+    }
+
+    public void UpdatePrice(decimal price)
+    {
+        ValidatePrice(price);
+        Price = price;
+    }
+
     private void ValidatePrice(decimal price)
     {
-        if (price < 0)       
-            throw new OnValidationException(ResourceExceptionMessage.PRICE_NEGATIVE);       
+        if (price < 0)
+            throw new OnValidationException(ResourceExceptionMessage.PRICE_NEGATIVE);
     }
 }
