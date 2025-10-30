@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BugStore.Application\BugStore.Application.csproj" />
     <ProjectReference Include="..\BugStore.Infra\BugStore.Infra.csproj" />
+    <ProjectReference Include="..\BugStore.Exception\BugStore.Exception.csproj" />
   </ItemGroup>
 
 </Project>
