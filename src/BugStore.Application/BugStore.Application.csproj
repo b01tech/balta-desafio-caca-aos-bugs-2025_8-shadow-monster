@@ -11,4 +11,9 @@
     <ProjectReference Include="..\BugStore.Exception\BugStore.Exception.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Mediator.Abstractions" Version="3.0.1" />
+    <PackageReference Include="Mediator.SourceGenerator" Version="3.0.1" />
+  </ItemGroup>
+
 </Project>
