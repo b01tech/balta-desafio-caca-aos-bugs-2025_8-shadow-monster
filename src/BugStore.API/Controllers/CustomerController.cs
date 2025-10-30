@@ -20,19 +20,19 @@ public class CustomerController : ControllerBase
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public IActionResult GetById(Guid id)
+    public async Task<IActionResult> GetByIdAsync(Guid id)
     {
         var query = new GetCustomerByIdQuery(id);
-        var response = _mediator.SendAsync<GetCustomerByIdQuery, ResponseDataCustomerDTO>(query);
+        var response = await _mediator.SendAsync<GetCustomerByIdQuery, ResponseDataCustomerDTO>(query);
         return Ok(response);
     }
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public IActionResult GetAll([FromQuery]int page = 1, int pageSize = 10)
+    public async Task<IActionResult> GetAllAsync([FromQuery]int page = 1, int pageSize = 10)
     {
         var query = new GetCustomerListQuery(page, pageSize);
-        var response = _mediator.SendAsync<GetCustomerListQuery, ResponseListCustomerDTO>(query);
+        var response = await _mediator.SendAsync<GetCustomerListQuery, ResponseListCustomerDTO>(query);
         return Ok(response);
     }
 
