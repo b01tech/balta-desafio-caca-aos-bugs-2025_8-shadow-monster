@@ -99,5 +99,16 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("CUSTOMER_NOT_FOUND", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown error.
+        /// </summary>
+        public static string UNKNOWN_ERROR
+        {
+            get
+            {
+                return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
     }
 }
