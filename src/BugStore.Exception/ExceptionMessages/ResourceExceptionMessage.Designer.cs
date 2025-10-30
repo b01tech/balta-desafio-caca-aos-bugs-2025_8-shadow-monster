@@ -110,5 +110,16 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
             }
         }
+        /// <summary>
+        ///   Looks up a localized string similar to Product not found.
+        /// </summary>
+        public static string PRODUCT_NOT_FOUND
+        {
+            get
+            {
+                return ResourceManager.GetString("PRODUCT_NOT_FOUND", resourceCulture);
+            }
+        }
+
     }
 }
