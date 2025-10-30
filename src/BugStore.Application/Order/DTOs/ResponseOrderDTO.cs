@@ -17,4 +17,11 @@ namespace BugStore.Application.Order.DTOs
     );
 
     public record OrderLineDTO(Guid ProductId, int Quantity, decimal Price, decimal Total);
+
+    public record ResponseListOrderDTO(
+        long TotalItems,
+        int Page,
+        int TotalPages,
+        IList<ResponseOrderSummaryDTO> Orders
+    );
 }
