@@ -28,5 +28,9 @@ namespace BugStore.Infra.Repositories
         {
             return await _dbContext.Customers.AnyAsync(c => c.Email.Equals(email));
         }
+        public async Task<long> GetTotalItemAsync()
+        {
+            return await _dbContext.Customers.CountAsync();
+        }
     }
 }

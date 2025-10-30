@@ -7,5 +7,6 @@ namespace BugStore.Domain.Interfaces
         Task<Customer?> GetByIdAsync(Guid id);
         Task<IEnumerable<Customer>> GetAllAsync(int page, int pageSize);
         Task<bool> ExistsByEmailAsync(string email);
+        Task<long> GetTotalItemAsync();
     }
 }
