@@ -10,8 +10,8 @@
 
 namespace BugStore.Exception.ExceptionMessages {
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +23,15 @@ namespace BugStore.Exception.ExceptionMessages {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ResourceExceptionMessage {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal ResourceExceptionMessage() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +45,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,7 +59,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Price cannot be negative.
         /// </summary>
@@ -68,7 +68,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("PRICE_NEGATIVE", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Product already added to order.
         /// </summary>
@@ -77,13 +77,26 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("PRODUCT_DUPLICATED", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Quantity must be greater than zero.
         /// </summary>
-        public static string QUANTITY_INVALID {
-            get {
+        public static string QUANTITY_INVALID
+        {
+            get
+            {
                 return ResourceManager.GetString("QUANTITY_INVALID", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Customer not found.
+        /// </summary>
+        public static string CUSTOMER_NOT_FOUND
+        {
+            get
+            {
+                return ResourceManager.GetString("CUSTOMER_NOT_FOUND", resourceCulture);
             }
         }
     }
