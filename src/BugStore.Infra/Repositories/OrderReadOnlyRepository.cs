@@ -101,17 +101,25 @@ namespace BugStore.Infra.Repositories
         public async Task<IEnumerable<(Guid CustomerId, string CustomerName, long TotalOrders, decimal TotalSpent)>> GetBestCustomersAsync(int topCustomers)
         {
             var bestCustomers = await _dbContext.Orders
-                .Include(o => o.Customer)
-                .GroupBy(o => new { o.CustomerId, o.Customer.Name })
+                .GroupBy(o => o.CustomerId)
                 .Select(g => new
                 {
-                    CustomerId = g.Key.CustomerId,
-                    CustomerName = g.Key.Name,
+                    CustomerId = g.Key,
                     TotalOrders = g.Count(),
                     TotalSpent = g.Sum(o => o.Total)
                 })
                 .OrderByDescending(x => x.TotalSpent)
                 .Take(topCustomers)
+                .Join(_dbContext.Customers,
+                    order => order.CustomerId,
+                    customer => customer.Id,
+                    (order, customer) => new
+                    {
+                        CustomerId = order.CustomerId,
+                        CustomerName = customer.Name,
+                        TotalOrders = order.TotalOrders,
+                        TotalSpent = order.TotalSpent
+                    })
                 .ToListAsync();
 
             return bestCustomers.Select(bc => (bc.CustomerId, bc.CustomerName, (long)bc.TotalOrders, bc.TotalSpent));
