@@ -1,5 +1,6 @@
 using BugStore.Application.Order.Commands;
 using BugStore.Application.Order.DTOs;
+using BugStore.Application.Order.Validators;
 using BugStore.Domain.Interfaces;
 using BugStore.Exception.ExceptionMessages;
 using BugStore.Exception.ProjectException;
@@ -12,16 +13,19 @@ namespace BugStore.Application.Order.Handlers
         private readonly IOrderWriteRepository _orderWriteRepository;
         private readonly IOrderReadOnlyRepository _orderReadOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly OrderLineValidator _orderLineValidator;
 
         public AddLineHandler(
             IOrderWriteRepository orderWriteRepository,
             IOrderReadOnlyRepository orderReadOnlyRepository,
-            IUnitOfWork unitOfWork
+            IUnitOfWork unitOfWork,
+            OrderLineValidator orderLineValidator
         )
         {
             _orderWriteRepository = orderWriteRepository;
             _orderReadOnlyRepository = orderReadOnlyRepository;
             _unitOfWork = unitOfWork;
+            _orderLineValidator = orderLineValidator;
         }
 
         public async ValueTask<ResponseOrderDetailedDTO> Handle(
@@ -29,6 +33,8 @@ namespace BugStore.Application.Order.Handlers
             CancellationToken cancellationToken
         )
         {
+            await ValidateAsync(command.Request);
+
             var order = await _orderReadOnlyRepository.GetByIdAsync(command.OrderId);
             if (order is null)
                 throw new NotFoundException(ResourceExceptionMessage.ORDER_NOT_FOUND);
@@ -59,6 +65,13 @@ namespace BugStore.Application.Order.Handlers
                     .ToList(),
                 updatedOrder.Total
             );
+        }
+
+        private async Task ValidateAsync(RequestOrderLineDTO request)
+        {
+            var validationResult = await _orderLineValidator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+                throw new OnValidationException(validationResult.Errors.Select(x => x.ErrorMessage).ToList());
         }
     }
 }
