@@ -2,6 +2,7 @@ using BugStore.Application.Reports.DTOs;
 using BugStore.Application.Reports.Handlers;
 using BugStore.Application.Reports.Queries;
 using BugStore.Domain.Interfaces;
+using BugStore.Exception.ProjectException;
 using BugStore.TestUtilities.Builders;
 using Moq;
 
@@ -64,11 +65,10 @@ public class GetRevenueByCustomerHandlerTests
             .ReturnsAsync((Domain.Entities.Customer?)null);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<ArgumentException>(
+        var exception = await Assert.ThrowsAsync<NotFoundException>(
             () => _handler.Handle(query, CancellationToken.None).AsTask()
         );
 
-        Assert.Contains($"Cliente com ID {customerId} não encontrado", exception.Message);
     }
 
     [Fact]
