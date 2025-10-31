@@ -1,6 +1,6 @@
-![github-repository-share_mind-flayer](https://github.com/user-attachments/assets/3e9bf6ea-73f3-4962-9a2f-f6d8072f3cba)
+![github-repository-share_shadow-monster](https://github.com/user-attachments/assets/fc0d4703-c9b5-4320-969f-c234c9d4b979)
 
-## 👻 Caça aos Bugs 2025 - Desafio 07 - Mind Flayer
+## 👻 Caça aos Bugs 2025 - Desafio 08 - Shadow Monster
 
 Oi, eu sou o Bruno e este é o espaço onde compartilho minha jornada de aprendizado durante o desafio **Caça aos Bugs 2025**, realizado pelo [balta.io](https://balta.io). 👻
 
@@ -8,27 +8,22 @@ Aqui você vai encontrar projetos, exercícios e códigos que estou desenvolvend
 
 ### Sobre este desafio
 
-No desafio **Mind Flayer** eu tive que alterar a funcionalidade de listar todos os itens adicionando paginação a mesma.
+No desafio **Shadow Monster** eu tive que fazer a publicação da aplicação utilizando o processo de CI/CD com GitHub Actions.
 Neste processo eu aprendi:
 
--   ✅ CRUD
--   ✅ Entity Framework
--   ✅ Acesso à Dados
--   ✅ API
+-   ✅ Git e GitHub
+-   ✅ CI/CD
+-   ✅ Build e Test
+-   ✅ GitHub Actions
+-   ✅ Microsoft Azure
 
 ## REGRAS DO DESAFIO
 
--   ✅ Realizar um fork do repositório do desafio
--   ✅ Criar um relatório de vendas por cliente
--   ✅ Criar um relatório de faturamento por período
-
-# ✅ DESAFIO CONCLUÍDO!
-
-### Funcionalidades Implementadas
-
--   **Relatórios por Período** - Faturamento detalhado com filtros de data
--   **Relatórios por Cliente** - Vendas individualizadas por cliente
--   **Melhores Clientes** - Ranking dos clientes que geram mais faturamento
+-   [ ] Realizar um fork do repositório do desafio
+-   [ ] Criar um Workflow para branch main
+-   [ ] Executar o build do projeto no Workflow
+-   [ ] Executar o teste (Unit Test) do projeto no Workflow
+-   [ ] Realizar o deployment automatizado da aplicação via CI/CD
 
 ## 🏗️ Arquitetura e Tecnologias
 
