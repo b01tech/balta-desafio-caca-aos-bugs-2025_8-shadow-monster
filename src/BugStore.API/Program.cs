@@ -7,7 +7,7 @@ DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllerOptions();
 builder.Services.AddMvc(opt => opt.Filters.Add(typeof(GlobalExceptionFilter)));
 builder.Services.AddRouting(opt => opt.LowercaseUrls = true);
 builder.Services.AddInfrastructure(builder.Configuration).AddApplication().AddDocumentationApi();
