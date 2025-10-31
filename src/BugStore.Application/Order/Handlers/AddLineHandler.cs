@@ -13,13 +13,13 @@ namespace BugStore.Application.Order.Handlers
         private readonly IOrderWriteRepository _orderWriteRepository;
         private readonly IOrderReadOnlyRepository _orderReadOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly OrderLineValidator _orderLineValidator;
+        private readonly IOrderLineValidator _orderLineValidator;
 
         public AddLineHandler(
             IOrderWriteRepository orderWriteRepository,
             IOrderReadOnlyRepository orderReadOnlyRepository,
             IUnitOfWork unitOfWork,
-            OrderLineValidator orderLineValidator
+            IOrderLineValidator orderLineValidator
         )
         {
             _orderWriteRepository = orderWriteRepository;
