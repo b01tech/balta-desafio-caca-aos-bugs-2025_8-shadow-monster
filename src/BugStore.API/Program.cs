@@ -19,4 +19,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
+await app.Services.ApplyPendingMigrationsAsync();
+
 app.Run();
