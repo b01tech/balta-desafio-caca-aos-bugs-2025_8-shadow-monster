@@ -138,4 +138,22 @@
   <data name="ORDER_NOT_FOUND" xml:space="preserve">
     <value>Order not found</value>
   </data>
+  <data name="NAME_EMPTY" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="EMAIL_EMPTY" xml:space="preserve">
+    <value>Email is required</value>
+  </data>
+  <data name="EMAIL_INVALID" xml:space="preserve">
+    <value>Email format is invalid</value>
+  </data>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>Email is already registered</value>
+  </data>
+  <data name="PHONE_EMPTY" xml:space="preserve">
+    <value>Phone is required</value>
+  </data>
+  <data name="BIRTHDATE_INVALID" xml:space="preserve">
+    <value>Birth date must be in the past</value>
+  </data>
 </root>
