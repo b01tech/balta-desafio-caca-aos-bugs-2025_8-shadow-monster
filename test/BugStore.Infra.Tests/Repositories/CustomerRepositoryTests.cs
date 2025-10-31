@@ -199,11 +199,19 @@ namespace BugStore.Infra.Tests.Repositories
         public async Task UpdateAsync_WithExistingCustomer_ShouldUpdateInDatabase()
         {
             // Arrange
-            var customer = CustomerBuilder.Build(name: "Original Name", email: "original@example.com");
+            var customer = CustomerBuilder.Build(
+                name: "Original Name",
+                email: "original@example.com"
+            );
             DbContext.Customers.Add(customer);
             await DbContext.SaveChangesAsync();
 
-            customer.Update("Updated Name", "updated@example.com", customer.Phone, customer.BirthDate);
+            customer.Update(
+                "Updated Name",
+                "updated@example.com",
+                customer.Phone,
+                customer.BirthDate
+            );
 
             // Act
             await _writeRepository.UpdateAsync(customer);
