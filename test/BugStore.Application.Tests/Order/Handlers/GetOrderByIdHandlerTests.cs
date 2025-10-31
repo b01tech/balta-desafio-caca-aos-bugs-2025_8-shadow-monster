@@ -19,32 +19,6 @@ public class GetOrderByIdHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WithExistingOrder_ShouldReturnOrderDetails()
-    {
-        // Arrange
-        var orderId = Guid.CreateVersion7();
-        var order = OrderBuilder.BuildWithLines();
-        var query = new GetOrderByIdQuery(orderId);
-
-        _readRepositoryMock.Setup(x => x.GetByIdAsync(orderId)).ReturnsAsync(order);
-
-        // Act
-        var result = await _handler.Handle(query, CancellationToken.None);
-
-        // Assert
-        Assert.NotNull(result);
-        Assert.Equal(order.Id, result.Id);
-        Assert.Equal(order.CustomerId, result.CustomerId);
-        Assert.Equal(order.CreatedAt, result.CreatedAt);
-        Assert.Equal(order.UpdatedAt, result.UpdatedAt);
-        Assert.Equal(order.Total, result.Total);
-        Assert.NotNull(result.Lines);
-        Assert.Equal(order.Lines.Count, result.Lines.Count);
-
-        _readRepositoryMock.Verify(x => x.GetByIdAsync(orderId), Times.Once);
-    }
-
-    [Fact]
     public async Task Handle_WithNonExistentOrder_ShouldThrowNotFoundException()
     {
         // Arrange

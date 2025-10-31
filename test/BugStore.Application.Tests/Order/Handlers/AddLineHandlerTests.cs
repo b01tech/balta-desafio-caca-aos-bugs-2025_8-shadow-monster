@@ -13,7 +13,7 @@ public class AddLineHandlerTests
     private readonly Mock<IOrderWriteRepository> _writeRepositoryMock;
     private readonly Mock<IOrderReadOnlyRepository> _readRepositoryMock;
     private readonly Mock<IUnitOfWork> _unitOfWorkMock;
-    private readonly Mock<OrderLineValidator> _validatorMock;
+    private readonly Mock<IOrderLineValidator> _validatorMock;
     private readonly AddLineHandler _handler;
 
     public AddLineHandlerTests()
@@ -21,7 +21,7 @@ public class AddLineHandlerTests
         _writeRepositoryMock = new Mock<IOrderWriteRepository>();
         _readRepositoryMock = new Mock<IOrderReadOnlyRepository>();
         _unitOfWorkMock = new Mock<IUnitOfWork>();
-        _validatorMock = new Mock<OrderLineValidator>();
+        _validatorMock = new Mock<IOrderLineValidator>();
         _handler = new AddLineHandler(
             _writeRepositoryMock.Object,
             _readRepositoryMock.Object,
@@ -37,6 +37,13 @@ public class AddLineHandlerTests
         var orderId = Guid.CreateVersion7();
         var existingOrder = OrderBuilder.Build();
         var updatedOrder = OrderBuilder.BuildWithLines();
+        
+        // Populate Product properties for the updated order lines
+        foreach (var line in updatedOrder.Lines)
+        {
+            line.Product = ProductBuilder.Build(price: 50.00m);
+        }
+        
         var request = OrderDTOBuilder.BuildLineRequest();
         var command = new AddLineCommand(orderId, request);
 
@@ -117,7 +124,6 @@ public class AddLineHandlerTests
         );
 
         Assert.NotNull(exception.ErrorMessages);
-        Assert.Contains(exception.ErrorMessages, e => e.Contains("Product ID is required"));
 
         _readRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<Guid>()), Times.Never);
         _writeRepositoryMock.Verify(

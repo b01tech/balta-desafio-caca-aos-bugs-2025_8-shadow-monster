@@ -33,9 +33,7 @@ public class AddCustomerHandlerTests
         var request = CustomerDTOBuilder.BuildRequest();
         var command = new AddCustomerCommand(request);
 
-        _readRepositoryMock
-            .Setup(x => x.ExistsByEmailAsync(request.Email))
-            .ReturnsAsync(false);
+        _readRepositoryMock.Setup(x => x.ExistsByEmailAsync(request.Email)).ReturnsAsync(false);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
@@ -47,7 +45,10 @@ public class AddCustomerHandlerTests
         Assert.Equal(request.Phone, result.Phone);
         Assert.Equal(request.BirthDate, result.BirthDate);
 
-        _writeRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Domain.Entities.Customer>()), Times.Once);
+        _writeRepositoryMock.Verify(
+            x => x.AddAsync(It.IsAny<Domain.Entities.Customer>()),
+            Times.Once
+        );
         _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Once);
     }
 
@@ -59,10 +60,14 @@ public class AddCustomerHandlerTests
         var command = new AddCustomerCommand(request);
 
         // Act & Assert
-        await Assert.ThrowsAsync<OnValidationException>(() => 
-            _handler.Handle(command, CancellationToken.None).AsTask());
+        await Assert.ThrowsAsync<OnValidationException>(
+            () => _handler.Handle(command, CancellationToken.None).AsTask()
+        );
 
-        _writeRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Domain.Entities.Customer>()), Times.Never);
+        _writeRepositoryMock.Verify(
+            x => x.AddAsync(It.IsAny<Domain.Entities.Customer>()),
+            Times.Never
+        );
         _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Never);
     }
 
@@ -74,10 +79,14 @@ public class AddCustomerHandlerTests
         var command = new AddCustomerCommand(request);
 
         // Act & Assert
-        await Assert.ThrowsAsync<OnValidationException>(() => 
-            _handler.Handle(command, CancellationToken.None).AsTask());
+        await Assert.ThrowsAsync<OnValidationException>(
+            () => _handler.Handle(command, CancellationToken.None).AsTask()
+        );
 
-        _writeRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Domain.Entities.Customer>()), Times.Never);
+        _writeRepositoryMock.Verify(
+            x => x.AddAsync(It.IsAny<Domain.Entities.Customer>()),
+            Times.Never
+        );
         _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Never);
     }
 
@@ -89,29 +98,35 @@ public class AddCustomerHandlerTests
         var command = new AddCustomerCommand(request);
 
         // Act & Assert
-        await Assert.ThrowsAsync<OnValidationException>(() => 
-            _handler.Handle(command, CancellationToken.None).AsTask());
+        await Assert.ThrowsAsync<OnValidationException>(
+            () => _handler.Handle(command, CancellationToken.None).AsTask()
+        );
 
-        _writeRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Domain.Entities.Customer>()), Times.Never);
+        _writeRepositoryMock.Verify(
+            x => x.AddAsync(It.IsAny<Domain.Entities.Customer>()),
+            Times.Never
+        );
         _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Never);
     }
 
     [Fact]
-    public async Task Handle_WithExistingEmail_ShouldThrowOnValidationException()
+    public async Task Handle_WithExistingEmail_ShouldThrowConflitException()
     {
         // Arrange
         var request = CustomerDTOBuilder.BuildRequest();
         var command = new AddCustomerCommand(request);
 
-        _readRepositoryMock
-            .Setup(x => x.ExistsByEmailAsync(request.Email))
-            .ReturnsAsync(true);
+        _readRepositoryMock.Setup(x => x.ExistsByEmailAsync(request.Email)).ReturnsAsync(true);
 
         // Act & Assert
-        await Assert.ThrowsAsync<OnValidationException>(() => 
-            _handler.Handle(command, CancellationToken.None).AsTask());
+        await Assert.ThrowsAsync<ConflitException>(
+            () => _handler.Handle(command, CancellationToken.None).AsTask()
+        );
 
-        _writeRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Domain.Entities.Customer>()), Times.Never);
+        _writeRepositoryMock.Verify(
+            x => x.AddAsync(It.IsAny<Domain.Entities.Customer>()),
+            Times.Never
+        );
         _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Never);
     }
 }

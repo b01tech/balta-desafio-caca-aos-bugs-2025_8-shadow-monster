@@ -101,7 +101,7 @@ public class UpdateCustomerHandlerTests
     }
 
     [Fact]
-    public async Task Handle_WithExistingEmail_ShouldThrowOnValidationException()
+    public async Task Handle_WithExistingEmail_ShouldThrowConflitException()
     {
         // Arrange
         var customerId = Guid.CreateVersion7();
@@ -114,7 +114,7 @@ public class UpdateCustomerHandlerTests
         _readRepositoryMock.Setup(x => x.ExistsByEmailAsync(request.Email)).ReturnsAsync(true);
 
         // Act & Assert
-        await Assert.ThrowsAsync<OnValidationException>(
+        await Assert.ThrowsAsync<ConflitException>(
             () => _handler.Handle(command, CancellationToken.None).AsTask()
         );
 

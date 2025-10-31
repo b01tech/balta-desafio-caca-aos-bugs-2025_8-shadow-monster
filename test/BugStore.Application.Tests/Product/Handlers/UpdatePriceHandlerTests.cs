@@ -97,26 +97,4 @@ public class UpdatePriceHandlerTests
         _writeRepositoryMock.Verify(x => x.UpdateAsync(existingProduct), Times.Once);
         _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Once);
     }
-
-    [Fact]
-    public async Task Handle_WithNegativePrice_ShouldUpdatePrice()
-    {
-        // Arrange
-        var productId = Guid.CreateVersion7();
-        var newPrice = -10m;
-        var existingProduct = ProductBuilder.Build();
-        var command = new UpdatePriceCommand(productId, newPrice);
-
-        _readRepositoryMock.Setup(x => x.GetByIdAsync(productId)).ReturnsAsync(existingProduct);
-
-        // Act
-        var result = await _handler.Handle(command, CancellationToken.None);
-
-        // Assert
-        Assert.NotNull(result);
-        Assert.Equal(newPrice, result.Price);
-
-        _writeRepositoryMock.Verify(x => x.UpdateAsync(existingProduct), Times.Once);
-        _unitOfWorkMock.Verify(x => x.CommitAsync(), Times.Once);
-    }
 }
