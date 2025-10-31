@@ -27,7 +27,6 @@ namespace BugStore.Infra.Data
             {
                 entity.ToTable("Customers");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasDefaultValueSql("uuid_generate_v7()");
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.Phone).IsRequired().HasMaxLength(20);
@@ -41,7 +40,6 @@ namespace BugStore.Infra.Data
             {
                 entity.ToTable("Products");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasDefaultValueSql("uuid_generate_v7()");
                 entity.Property(e => e.Title).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.Description).IsRequired().HasMaxLength(255);
                 entity.Property(e => e.Slug).IsRequired().HasMaxLength(100);
@@ -55,7 +53,6 @@ namespace BugStore.Infra.Data
             {
                 entity.ToTable("Orders");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasDefaultValueSql("uuid_generate_v7()");
                 entity.Property(e => e.CustomerId).IsRequired();
                 entity.Property(e => e.CreatedAt).IsRequired();
                 entity.Property(e => e.UpdatedAt);
@@ -82,7 +79,6 @@ namespace BugStore.Infra.Data
             {
                 entity.ToTable("OrderLines");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasDefaultValueSql("uuid_generate_v7()");
                 entity.Property(e => e.OrderId).IsRequired();
                 entity.Property(e => e.ProductId).IsRequired();
                 entity.Property(e => e.Quantity).IsRequired();
