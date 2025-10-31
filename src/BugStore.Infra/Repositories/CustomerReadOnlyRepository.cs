@@ -20,6 +20,7 @@ namespace BugStore.Infra.Repositories
         public async Task<IEnumerable<Customer>> GetAllAsync(int page, int pageSize)
         {
             return await _dbContext.Customers
+                .AsNoTracking()
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();

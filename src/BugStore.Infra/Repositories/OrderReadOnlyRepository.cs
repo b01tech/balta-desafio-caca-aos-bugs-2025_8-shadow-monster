@@ -31,6 +31,7 @@ namespace BugStore.Infra.Repositories
                 .Orders.Include(o => o.Lines)
                 .ThenInclude(ol => ol.Product)
                 .Include(o => o.Customer)
+                .AsNoTracking()
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -46,6 +47,7 @@ namespace BugStore.Infra.Repositories
                 .Orders.Include(o => o.Lines)
                 .ThenInclude(ol => ol.Product)
                 .Include(o => o.Customer)
+                .AsNoTracking()
                 .Where(o => o.CustomerId == customerId)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -60,7 +62,7 @@ namespace BugStore.Infra.Repositories
         public async Task<(long TotalOrders, decimal TotalRevenue)> GetTotalByPeriod(DateTime start, DateTime end)
         {
             const string sql = @"
-                SELECT 
+                SELECT
                     COUNT(DISTINCT o.""Id"") as TotalOrders,
                     COALESCE(SUM(ol.""Total""), 0) as TotalRevenue
                 FROM ""Orders"" o
@@ -72,14 +74,14 @@ namespace BugStore.Infra.Repositories
                 await connection.OpenAsync();
 
             var result = await connection.QuerySingleAsync<PeriodTotalResult>(sql, new { Start = start, End = end });
-            
+
             return (result.TotalOrders, result.TotalRevenue);
         }
 
         public async Task<(long TotalOrders, decimal TotalSpent)> GetTotalByCustomerIdAsync(Guid customerId)
         {
             const string sql = @"
-                SELECT 
+                SELECT
                     COUNT(DISTINCT o.""Id"") as TotalOrders,
                     COALESCE(SUM(ol.""Total""), 0) as TotalSpent
                 FROM ""Orders"" o
@@ -91,7 +93,7 @@ namespace BugStore.Infra.Repositories
                 await connection.OpenAsync();
 
             var result = await connection.QuerySingleAsync<CustomerTotalResult>(sql, new { CustomerId = customerId });
-            
+
             return (result.TotalOrders, result.TotalSpent);
         }
 

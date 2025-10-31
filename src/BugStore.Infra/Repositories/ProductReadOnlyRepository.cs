@@ -21,8 +21,9 @@ namespace BugStore.Infra.Repositories
 
         public async Task<IEnumerable<Product>> GetAllAsync(int page, int pageSize)
         {
-            return await _dbContext
-                .Products.Skip((page - 1) * pageSize)
+            return await _dbContext.Products
+                .AsNoTracking()
+                .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
         }
