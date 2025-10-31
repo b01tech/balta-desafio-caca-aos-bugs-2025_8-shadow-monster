@@ -6,7 +6,10 @@ namespace BugStore.API.Extensions
     {
         public static IServiceCollection AddControllerOptions(this IServiceCollection services)
         {
-            services.AddControllers()
+            services.AddControllers(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DateTimeModelBinderProvider());
+                })
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.Converters.Add(new BugStore.API.Extensions.DateTimeConverter());
