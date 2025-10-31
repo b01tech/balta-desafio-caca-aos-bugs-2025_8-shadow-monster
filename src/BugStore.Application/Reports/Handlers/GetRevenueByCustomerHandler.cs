@@ -1,6 +1,8 @@
 using BugStore.Application.Reports.DTOs;
 using BugStore.Application.Reports.Queries;
 using BugStore.Domain.Interfaces;
+using BugStore.Exception.ExceptionMessages;
+using BugStore.Exception.ProjectException;
 using Mediator;
 
 namespace BugStore.Application.Reports.Handlers
@@ -20,9 +22,7 @@ namespace BugStore.Application.Reports.Handlers
         {
             var customer = await _customerRepository.GetByIdAsync(request.Request.CustomerId);
             if (customer == null)
-            {
-                throw new ArgumentException($"Cliente com ID {request.Request.CustomerId} não encontrado.");
-            }
+                throw new NotFoundException(ResourceExceptionMessage.CUSTOMER_NOT_FOUND);
 
             var (totalOrders, totalSpent) = await _orderRepository.GetTotalByCustomerIdAsync(request.Request.CustomerId);
 
