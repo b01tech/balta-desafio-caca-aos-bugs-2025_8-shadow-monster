@@ -85,12 +85,15 @@ namespace BugStore.API.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("{orderId}/line/{productId}")]
+        [HttpDelete("{orderId}/line")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> RemoveLineAsync(Guid orderId, Guid productId)
+        public async Task<IActionResult> RemoveLineAsync(
+            Guid orderId,
+            [FromBody] RequestProductDTO request
+        )
         {
-            var command = new RemoveLineCommand(orderId, productId);
+            var command = new RemoveLineCommand(orderId, request.ProductId);
             var response = await _mediator.SendAsync<RemoveLineCommand, ResponseOrderDetailedDTO>(
                 command
             );
