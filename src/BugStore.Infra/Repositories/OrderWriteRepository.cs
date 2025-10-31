@@ -19,6 +19,12 @@ namespace BugStore.Infra.Repositories
             await _dbContext.Orders.AddAsync(order);
         }
 
+        public async Task UpdateAsync(Order order)
+        {
+            _dbContext.Orders.Update(order);
+            await Task.CompletedTask;
+        }
+
         public async Task AddLineAsync(OrderLine orderLine)
         {
             await _dbContext.OrderLines.AddAsync(orderLine);
