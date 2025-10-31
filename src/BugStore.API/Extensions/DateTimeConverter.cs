@@ -19,7 +19,7 @@ public class DateTimeConverter : JsonConverter<DateTime>
 
         if (DateTime.TryParseExact(dateString, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
         {
-            return date;
+            return DateTime.SpecifyKind(date, DateTimeKind.Utc);
         }
 
         throw new FormatInvalidException(ResourceExceptionMessage.DATE_INVALID);
