@@ -10,7 +10,6 @@ namespace BugStore.Domain.Interfaces
         Task<long> GetTotalItemAsync();
         Task<(long TotalOrders, decimal TotalRevenue)> GetTotalByPeriod(DateTime start, DateTime end);
         Task<(long TotalOrders, decimal TotalSpent)> GetTotalByCustomerIdAsync(Guid customerId);
-        Task<(Guid CustomerId, long TotalOrders, decimal TotalSpent)> GetBestCustomerBySpentAsync();
         Task<IEnumerable<(Guid CustomerId, string CustomerName, long TotalOrders, decimal TotalSpent)>> GetBestCustomersAsync(int topCustomers);
     }
 }

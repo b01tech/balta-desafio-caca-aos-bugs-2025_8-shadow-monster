@@ -2,6 +2,8 @@ using BugStore.Domain.Entities;
 using BugStore.Domain.Interfaces;
 using BugStore.Infra.Data;
 using Microsoft.EntityFrameworkCore;
+using Dapper;
+using System.Data;
 
 namespace BugStore.Infra.Repositories
 {
@@ -57,72 +59,84 @@ namespace BugStore.Infra.Repositories
 
         public async Task<(long TotalOrders, decimal TotalRevenue)> GetTotalByPeriod(DateTime start, DateTime end)
         {
-            var orders = await _dbContext.Orders
-                .Where(o => o.CreatedAt >= start && o.CreatedAt <= end)
-                .ToListAsync();
+            const string sql = @"
+                SELECT 
+                    COUNT(DISTINCT o.""Id"") as TotalOrders,
+                    COALESCE(SUM(ol.""Total""), 0) as TotalRevenue
+                FROM ""Orders"" o
+                LEFT JOIN ""OrderLines"" ol ON o.""Id"" = ol.""OrderId""
+                WHERE o.""CreatedAt"" >= @Start AND o.""CreatedAt"" <= @End";
 
-            var totalOrders = orders.Count;
-            var totalRevenue = orders.Sum(o => o.Total);
+            using var connection = _dbContext.Database.GetDbConnection();
+            if (connection.State != ConnectionState.Open)
+                await connection.OpenAsync();
 
-            return (totalOrders, totalRevenue);
+            var result = await connection.QuerySingleAsync<PeriodTotalResult>(sql, new { Start = start, End = end });
+            
+            return (result.TotalOrders, result.TotalRevenue);
         }
 
         public async Task<(long TotalOrders, decimal TotalSpent)> GetTotalByCustomerIdAsync(Guid customerId)
         {
-            var orders = await _dbContext.Orders
-                .Where(o => o.CustomerId == customerId)
-                .ToListAsync();
+            const string sql = @"
+                SELECT 
+                    COUNT(DISTINCT o.""Id"") as TotalOrders,
+                    COALESCE(SUM(ol.""Total""), 0) as TotalSpent
+                FROM ""Orders"" o
+                LEFT JOIN ""OrderLines"" ol ON o.""Id"" = ol.""OrderId""
+                WHERE o.""CustomerId"" = @CustomerId";
 
-            var totalOrders = orders.Count;
-            var totalSpent = orders.Sum(o => o.Total);
+            using var connection = _dbContext.Database.GetDbConnection();
+            if (connection.State != ConnectionState.Open)
+                await connection.OpenAsync();
 
-            return (totalOrders, totalSpent);
-        }
-
-        public async Task<(Guid CustomerId, long TotalOrders, decimal TotalSpent)> GetBestCustomerBySpentAsync()
-        {
-            var bestCustomer = await _dbContext.Orders
-                .GroupBy(o => o.CustomerId)
-                .Select(g => new
-                {
-                    CustomerId = g.Key,
-                    TotalOrders = g.Count(),
-                    TotalSpent = g.Sum(o => o.Total)
-                })
-                .OrderByDescending(x => x.TotalSpent)
-                .FirstOrDefaultAsync();
-
-            if (bestCustomer == null)
-                return (Guid.Empty, 0, 0);
-
-            return (bestCustomer.CustomerId, bestCustomer.TotalOrders, bestCustomer.TotalSpent);
+            var result = await connection.QuerySingleAsync<CustomerTotalResult>(sql, new { CustomerId = customerId });
+            
+            return (result.TotalOrders, result.TotalSpent);
         }
 
         public async Task<IEnumerable<(Guid CustomerId, string CustomerName, long TotalOrders, decimal TotalSpent)>> GetBestCustomersAsync(int topCustomers)
         {
-            var bestCustomers = await _dbContext.Orders
-                .GroupBy(o => o.CustomerId)
-                .Select(g => new
-                {
-                    CustomerId = g.Key,
-                    TotalOrders = g.Count(),
-                    TotalSpent = g.Sum(o => o.Total)
-                })
-                .OrderByDescending(x => x.TotalSpent)
-                .Take(topCustomers)
-                .Join(_dbContext.Customers,
-                    order => order.CustomerId,
-                    customer => customer.Id,
-                    (order, customer) => new
-                    {
-                        CustomerId = order.CustomerId,
-                        CustomerName = customer.Name,
-                        TotalOrders = order.TotalOrders,
-                        TotalSpent = order.TotalSpent
-                    })
-                .ToListAsync();
+            const string sql = @"
+                SELECT
+                    o.""CustomerId"",
+                    c.""Name"" as CustomerName,
+                    COUNT(DISTINCT o.""Id"") as TotalOrders,
+                    SUM(ol.""Total"") as TotalSpent
+                FROM ""Orders"" o
+                INNER JOIN ""Customers"" c ON o.""CustomerId"" = c.""Id""
+                INNER JOIN ""OrderLines"" ol ON o.""Id"" = ol.""OrderId""
+                GROUP BY o.""CustomerId"", c.""Name""
+                ORDER BY SUM(ol.""Total"") DESC
+                LIMIT @TopCustomers";
 
-            return bestCustomers.Select(bc => (bc.CustomerId, bc.CustomerName, (long)bc.TotalOrders, bc.TotalSpent));
+            using var connection = _dbContext.Database.GetDbConnection();
+            if (connection.State != ConnectionState.Open)
+                await connection.OpenAsync();
+
+            var results = await connection.QueryAsync<BestCustomerResult>(sql, new { TopCustomers = topCustomers });
+
+            return results.Select(r => (r.CustomerId, r.CustomerName, r.TotalOrders, r.TotalSpent));
+        }
+
+        private class BestCustomerResult
+        {
+            public Guid CustomerId { get; set; }
+            public string CustomerName { get; set; } = string.Empty;
+            public long TotalOrders { get; set; }
+            public decimal TotalSpent { get; set; }
+        }
+
+        private class PeriodTotalResult
+        {
+            public long TotalOrders { get; set; }
+            public decimal TotalRevenue { get; set; }
+        }
+
+        private class CustomerTotalResult
+        {
+            public long TotalOrders { get; set; }
+            public decimal TotalSpent { get; set; }
         }
     }
 }
