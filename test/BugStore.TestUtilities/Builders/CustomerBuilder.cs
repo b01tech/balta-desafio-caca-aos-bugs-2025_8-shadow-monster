@@ -6,7 +6,13 @@ namespace BugStore.TestUtilities.Builders;
 public static class CustomerBuilder
 {
     private static readonly Faker _faker = new("pt_BR");
-    public static Customer Build(string? name = null, string? email = null, string? phone = null, DateTime? birthDate = null)
+
+    public static Customer Build(
+        string? name = null,
+        string? email = null,
+        string? phone = null,
+        DateTime? birthDate = null
+    )
     {
         return new Customer(
             name: name ?? _faker.Person.FullName,
@@ -15,5 +21,4 @@ public static class CustomerBuilder
             birthDate: birthDate ?? _faker.Person.DateOfBirth.Date
         );
     }
-
 }

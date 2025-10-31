@@ -7,7 +7,12 @@ namespace BugStore.TestUtilities.Builders
     {
         private static readonly Faker _faker = new("pt_BR");
 
-        public static Product Build(string? title =null, string? description = null, string? slug = null, decimal? price = null)
+        public static Product Build(
+            string? title = null,
+            string? description = null,
+            string? slug = null,
+            decimal? price = null
+        )
         {
             title ??= _faker.Commerce.ProductName();
             description ??= _faker.Lorem.Paragraph();

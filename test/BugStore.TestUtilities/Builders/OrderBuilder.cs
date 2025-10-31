@@ -29,7 +29,12 @@ namespace BugStore.TestUtilities.Builders
             return order;
         }
 
-        public static Order BuildWithSpecificLine(Guid? customerId = null, Guid? productId = null, int quantity = 1, decimal price = 100m)
+        public static Order BuildWithSpecificLine(
+            Guid? customerId = null,
+            Guid? productId = null,
+            int quantity = 1,
+            decimal price = 100m
+        )
         {
             var order = Build(customerId);
             order.AddLine(productId ?? Guid.CreateVersion7(), quantity, price);
