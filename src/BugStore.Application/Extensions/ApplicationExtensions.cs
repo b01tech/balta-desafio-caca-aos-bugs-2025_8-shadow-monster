@@ -1,3 +1,4 @@
+using BugStore.Application.Order.Validators;
 using BugStore.Application.Services.Mediator;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +14,7 @@ public static class ApplicationExtensions
     private static void AddServices(IServiceCollection services)
     {
         services.AddScoped<IMediatorService, MediatorService>();
+        services.AddScoped<IOrderLineValidator, OrderLineValidator>();
     }
     private static void ConfigureMediator(IServiceCollection services)
     {
