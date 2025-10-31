@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\BugStore.Application\BugStore.Application.csproj" />
     <ProjectReference Include="..\..\src\BugStore.Domain\BugStore.Domain.csproj" />
     <ProjectReference Include="..\..\src\BugStore.Infra\BugStore.Infra.csproj" />
   </ItemGroup>
