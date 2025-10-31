@@ -352,6 +352,26 @@ namespace BugStore.Exception.ExceptionMessages
                 return ResourceManager.GetString("DATE_INVALID", resourceCulture);
             }
         }
+        /// <summary>
+        ///   Looks up a localized string similar to Guid is required.
+        /// </summary>
+        public static string GUID_EMPTY
+        {
+            get
+            {
+                return ResourceManager.GetString("GUID_EMPTY", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Guid is invalid.
+        /// </summary>
+        public static string GUID_INVALID
+        {
+            get
+            {
+                return ResourceManager.GetString("GUID_INVALID", resourceCulture);
+            }
+        }
 
     }
 }
