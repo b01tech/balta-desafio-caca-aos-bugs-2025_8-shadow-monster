@@ -1,6 +1,8 @@
 using BugStore.Application.Product.Commands;
 using BugStore.Application.Product.DTOs;
+using BugStore.Application.Product.Validators;
 using BugStore.Domain.Interfaces;
+using BugStore.Exception.ProjectException;
 using Mediator;
 
 namespace BugStore.Application.Product.Handlers
@@ -9,11 +11,13 @@ namespace BugStore.Application.Product.Handlers
     {
         private readonly IProductWriteRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ProductValidator _validator;
 
         public AddProductHandler(IProductWriteRepository repository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
+            _validator = new ProductValidator();
         }
 
         public async ValueTask<ResponseProductDetailedDTO> Handle(
@@ -22,7 +26,9 @@ namespace BugStore.Application.Product.Handlers
         )
         {
             var request = command.Request;
-            // validar
+
+            await ValidateAsync(request);
+
             var product = new Domain.Entities.Product(
                 request.Title,
                 request.Description,
@@ -39,6 +45,17 @@ namespace BugStore.Application.Product.Handlers
                 product.Slug,
                 product.Price
             );
+        }
+
+        private async Task ValidateAsync(RequestProductDTO request)
+        {
+            var validationResult = await _validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+            {
+                throw new OnValidationException(
+                    validationResult.Errors.Select(x => x.ErrorMessage).ToList()
+                );
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
-using BugStore.Application.Customer.Commands;
 using BugStore.Application.Product.Commands;
 using BugStore.Application.Product.DTOs;
+using BugStore.Application.Product.Validators;
 using BugStore.Domain.Interfaces;
 using BugStore.Exception.ExceptionMessages;
 using BugStore.Exception.ProjectException;
@@ -33,6 +33,9 @@ namespace BugStore.Application.Product.Handlers
         {
             var request = command.Request;
 
+            // Validar dados de entrada
+            await ValidateAsync(request);
+
             var product = await _readRepository.GetByIdAsync(command.Id);
             if (product is null)
                 throw new NotFoundException(ResourceExceptionMessage.PRODUCT_NOT_FOUND);
@@ -48,6 +51,18 @@ namespace BugStore.Application.Product.Handlers
                 product.Slug,
                 product.Price
             );
+        }
+
+        private async Task ValidateAsync(RequestProductDTO request)
+        {
+            var validator = new ProductValidator();
+            var validationResult = await validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+            {
+                throw new OnValidationException(
+                    validationResult.Errors.Select(x => x.ErrorMessage).ToList()
+                );
+            }
         }
     }
 }
