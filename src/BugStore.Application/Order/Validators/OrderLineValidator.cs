@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace BugStore.Application.Order.Validators
 {
-    public class OrderLineValidator : AbstractValidator<RequestOrderLineDTO>
+    public class OrderLineValidator : AbstractValidator<RequestOrderLineDTO>, IOrderLineValidator
     {
         public OrderLineValidator()
         {
