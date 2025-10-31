@@ -196,6 +196,72 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("BIRTHDATE_INVALID", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title is required.
+        /// </summary>
+        public static string TITLE_EMPTY
+        {
+            get
+            {
+                return ResourceManager.GetString("TITLE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description is required.
+        /// </summary>
+        public static string DESCRIPTION_EMPTY
+        {
+            get
+            {
+                return ResourceManager.GetString("DESCRIPTION_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slug is required.
+        /// </summary>
+        public static string SLUG_EMPTY
+        {
+            get
+            {
+                return ResourceManager.GetString("SLUG_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slug must contain only lowercase letters, numbers and hyphens.
+        /// </summary>
+        public static string SLUG_INVALID
+        {
+            get
+            {
+                return ResourceManager.GetString("SLUG_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price is required.
+        /// </summary>
+        public static string PRICE_EMPTY
+        {
+            get
+            {
+                return ResourceManager.GetString("PRICE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price must be greater than zero.
+        /// </summary>
+        public static string PRICE_INVALID
+        {
+            get
+            {
+                return ResourceManager.GetString("PRICE_INVALID", resourceCulture);
+            }
+        }
 
     }
 }

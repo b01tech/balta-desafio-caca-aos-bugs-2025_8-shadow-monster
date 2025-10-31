@@ -156,4 +156,22 @@
   <data name="BIRTHDATE_INVALID" xml:space="preserve">
     <value>Birth date must be in the past</value>
   </data>
+  <data name="TITLE_EMPTY" xml:space="preserve">
+    <value>Title is required</value>
+  </data>
+  <data name="DESCRIPTION_EMPTY" xml:space="preserve">
+    <value>Description is required</value>
+  </data>
+  <data name="SLUG_EMPTY" xml:space="preserve">
+    <value>Slug is required</value>
+  </data>
+  <data name="SLUG_INVALID" xml:space="preserve">
+    <value>Slug must contain only lowercase letters, numbers and hyphens</value>
+  </data>
+  <data name="PRICE_EMPTY" xml:space="preserve">
+    <value>Price is required</value>
+  </data>
+  <data name="PRICE_INVALID" xml:space="preserve">
+    <value>Price must be greater than zero</value>
+  </data>
 </root>
