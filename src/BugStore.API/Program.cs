@@ -10,11 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllerOptions();
 builder.Services.AddMvc(opt => opt.Filters.Add(typeof(GlobalExceptionFilter)));
 builder.Services.AddRouting(opt => opt.LowercaseUrls = true);
-builder.Services.AddInfrastructure(builder.Configuration).AddApplication().AddDocumentationApi();
+builder.Services.AddInfrastructure(builder.Configuration)
+    .AddApplication()
+    .AddCorsPolicy()
+    .AddDocumentationApi();
 
 var app = builder.Build();
 
 app.UseDocumentationApi();
+app.UseCorsPolicy();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
