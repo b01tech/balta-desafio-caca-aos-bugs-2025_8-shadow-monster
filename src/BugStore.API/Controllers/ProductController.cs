@@ -72,7 +72,7 @@ namespace BugStore.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update(Guid id, [FromBody] RequestPriceDTO request)
+        public async Task<IActionResult> UpdatePrice(Guid id, [FromBody] RequestPriceDTO request)
         {
             var command = new UpdatePriceCommand(id, request.Price);
             var response = await _mediator.SendAsync<
