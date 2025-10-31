@@ -174,4 +174,19 @@
   <data name="PRICE_INVALID" xml:space="preserve">
     <value>Price must be greater than zero</value>
   </data>
+  <data name="PRODUCT_ID_EMPTY" xml:space="preserve">
+    <value>Product ID is required</value>
+  </data>
+  <data name="QUANTITY_EMPTY" xml:space="preserve">
+    <value>Quantity is required</value>
+  </data>
+  <data name="QUANTITY_MUST_BE_POSITIVE" xml:space="preserve">
+    <value>Quantity must be greater than zero</value>
+  </data>
+  <data name="ORDER_LINE_PRICE_EMPTY" xml:space="preserve">
+    <value>Order line price is required</value>
+  </data>
+  <data name="ORDER_LINE_PRICE_INVALID" xml:space="preserve">
+    <value>Order line price must be greater than zero</value>
+  </data>
 </root>

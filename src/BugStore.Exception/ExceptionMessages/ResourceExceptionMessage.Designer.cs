@@ -262,6 +262,61 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("PRICE_INVALID", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product ID is required.
+        /// </summary>
+        public static string PRODUCT_ID_EMPTY
+        {
+            get
+            {
+                return ResourceManager.GetString("PRODUCT_ID_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity is required.
+        /// </summary>
+        public static string QUANTITY_EMPTY
+        {
+            get
+            {
+                return ResourceManager.GetString("QUANTITY_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity must be greater than zero.
+        /// </summary>
+        public static string QUANTITY_MUST_BE_POSITIVE
+        {
+            get
+            {
+                return ResourceManager.GetString("QUANTITY_MUST_BE_POSITIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order line price is required.
+        /// </summary>
+        public static string ORDER_LINE_PRICE_EMPTY
+        {
+            get
+            {
+                return ResourceManager.GetString("ORDER_LINE_PRICE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order line price must be greater than zero.
+        /// </summary>
+        public static string ORDER_LINE_PRICE_INVALID
+        {
+            get
+            {
+                return ResourceManager.GetString("ORDER_LINE_PRICE_INVALID", resourceCulture);
+            }
+        }
 
     }
 }
