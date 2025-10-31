@@ -2,6 +2,7 @@ using BugStore.Exception.ExceptionMessages;
 using BugStore.Exception.ProjectException;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Text.Json;
 
 namespace BugStore.API.Filter
 {
@@ -46,6 +47,14 @@ namespace BugStore.API.Filter
                 var exception = context.Exception as ConflitException;
                 context.HttpContext.Response.StatusCode = StatusCodes.Status409Conflict;
                 context.Result = new ConflictObjectResult(
+                    new { errors = exception!.ErrorMessages }
+                );
+            }
+            else if (context.Exception is FormatInvalidException)
+            {
+                var exception = context.Exception as FormatInvalidException;
+                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                context.Result = new BadRequestObjectResult(
                     new { errors = exception!.ErrorMessages }
                 );
             }
