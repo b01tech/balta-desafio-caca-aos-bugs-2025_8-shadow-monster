@@ -87,14 +87,16 @@ namespace BugStore.Domain.Tests.Entities
         {
             // Arrange
             var order = OrderBuilder.Build();
-            var productId = Guid.NewGuid();
+            var productId = Guid.CreateVersion7();
             var quantity = 2;
             var price = 50.00m;
 
             order.AddLine(productId, quantity, price);
 
             // Act & Assert
-            Assert.Throws<OnInvalidOperationException>(() => order.AddLine(productId, quantity, price));
+            Assert.Throws<OnInvalidOperationException>(
+                () => order.AddLine(productId, quantity, price)
+            );
         }
 
         [Theory]
