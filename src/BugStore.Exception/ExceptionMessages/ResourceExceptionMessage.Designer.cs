@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BugStore.Exception.ExceptionMessages {
+namespace BugStore.Exception.ExceptionMessages
+{
     using System;
 
 
@@ -22,23 +23,28 @@ namespace BugStore.Exception.ExceptionMessages {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ResourceExceptionMessage {
+    public class ResourceExceptionMessage
+    {
 
         private static global::System.Resources.ResourceManager resourceMan;
 
         private static global::System.Globalization.CultureInfo resourceCulture;
 
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceExceptionMessage() {
+        internal ResourceExceptionMessage()
+        {
         }
 
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+        public static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BugStore.Exception.ExceptionMessages.ResourceExceptionMessage", typeof(ResourceExceptionMessage).Assembly);
                     resourceMan = temp;
                 }
@@ -51,11 +57,14 @@ namespace BugStore.Exception.ExceptionMessages {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
-            get {
+        public static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
@@ -63,8 +72,10 @@ namespace BugStore.Exception.ExceptionMessages {
         /// <summary>
         ///   Looks up a localized string similar to Price cannot be negative.
         /// </summary>
-        public static string PRICE_NEGATIVE {
-            get {
+        public static string PRICE_NEGATIVE
+        {
+            get
+            {
                 return ResourceManager.GetString("PRICE_NEGATIVE", resourceCulture);
             }
         }
@@ -72,8 +83,10 @@ namespace BugStore.Exception.ExceptionMessages {
         /// <summary>
         ///   Looks up a localized string similar to Product already added to order.
         /// </summary>
-        public static string PRODUCT_DUPLICATED {
-            get {
+        public static string PRODUCT_DUPLICATED
+        {
+            get
+            {
                 return ResourceManager.GetString("PRODUCT_DUPLICATED", resourceCulture);
             }
         }
@@ -196,7 +209,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("BIRTHDATE_INVALID", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Title is required.
         /// </summary>
@@ -207,7 +220,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("TITLE_EMPTY", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Description is required.
         /// </summary>
@@ -218,7 +231,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("DESCRIPTION_EMPTY", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Slug is required.
         /// </summary>
@@ -229,7 +242,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("SLUG_EMPTY", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Slug must contain only lowercase letters, numbers and hyphens.
         /// </summary>
@@ -240,7 +253,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("SLUG_INVALID", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Price is required.
         /// </summary>
@@ -251,7 +264,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("PRICE_EMPTY", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Price must be greater than zero.
         /// </summary>
@@ -262,7 +275,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("PRICE_INVALID", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Product ID is required.
         /// </summary>
@@ -273,7 +286,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("PRODUCT_ID_EMPTY", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Quantity is required.
         /// </summary>
@@ -284,7 +297,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("QUANTITY_EMPTY", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Quantity must be greater than zero.
         /// </summary>
@@ -295,7 +308,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("QUANTITY_MUST_BE_POSITIVE", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Order line price is required.
         /// </summary>
@@ -306,7 +319,7 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("ORDER_LINE_PRICE_EMPTY", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Order line price must be greater than zero.
         /// </summary>
@@ -315,6 +328,28 @@ namespace BugStore.Exception.ExceptionMessages {
             get
             {
                 return ResourceManager.GetString("ORDER_LINE_PRICE_INVALID", resourceCulture);
+            }
+        }
+
+
+        /// <summary>
+        ///   Looks up a localized string similar to Date is required.
+        /// </summary>
+        public static string DATE_EMPTY
+        {
+            get
+            {
+                return ResourceManager.GetString("DATE_EMPTY", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Date is invalid.
+        /// </summary>
+        public static string DATE_INVALID
+        {
+            get
+            {
+                return ResourceManager.GetString("DATE_INVALID", resourceCulture);
             }
         }
 

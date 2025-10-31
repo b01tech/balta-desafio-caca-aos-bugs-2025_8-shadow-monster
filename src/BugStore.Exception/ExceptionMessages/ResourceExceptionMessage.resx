@@ -189,4 +189,10 @@
   <data name="ORDER_LINE_PRICE_INVALID" xml:space="preserve">
     <value>Order line price must be greater than zero</value>
   </data>
+  <data name="DATE_EMPTY" xml:space="preserve">
+    <value>Date is required</value>
+  </data>
+  <data name="DATE_INVALID" xml:space="preserve">
+    <value>Date format is invalid. Use dd/MM/yyyy</value>
+  </data>
 </root>
