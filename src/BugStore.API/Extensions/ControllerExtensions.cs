@@ -10,6 +10,7 @@ namespace BugStore.API.Extensions
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.Converters.Add(new BugStore.API.Extensions.DateTimeConverter());
+                    options.JsonSerializerOptions.Converters.Add(new BugStore.API.Extensions.GuidConverter());
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 });
             return services;
