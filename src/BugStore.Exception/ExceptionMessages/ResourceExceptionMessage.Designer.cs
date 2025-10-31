@@ -120,6 +120,16 @@ namespace BugStore.Exception.ExceptionMessages {
                 return ResourceManager.GetString("PRODUCT_NOT_FOUND", resourceCulture);
             }
         }
+        /// <summary>
+        ///   Looks up a localized string similar to Order not found.
+        /// </summary>
+        public static string ORDER_NOT_FOUND
+        {
+            get
+            {
+                return ResourceManager.GetString("ORDER_NOT_FOUND", resourceCulture);
+            }
+        }
 
     }
 }

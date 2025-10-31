@@ -135,4 +135,7 @@
   <data name="PRODUCT_NOT_FOUND" xml:space="preserve">
     <value>Product not found</value>
   </data>
+  <data name="ORDER_NOT_FOUND" xml:space="preserve">
+    <value>Order not found</value>
+  </data>
 </root>
