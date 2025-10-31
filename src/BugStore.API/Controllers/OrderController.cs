@@ -90,7 +90,7 @@ namespace BugStore.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> RemoveLineAsync(
             Guid orderId,
-            [FromBody] RequestProductDTO request
+            [FromBody] RequestRemoveProductDTO request
         )
         {
             var command = new RemoveLineCommand(orderId, request.ProductId);
