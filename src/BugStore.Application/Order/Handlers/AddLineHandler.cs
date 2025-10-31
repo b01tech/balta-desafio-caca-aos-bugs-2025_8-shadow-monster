@@ -14,18 +14,20 @@ namespace BugStore.Application.Order.Handlers
         private readonly IOrderReadOnlyRepository _orderReadOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IOrderLineValidator _orderLineValidator;
+        private readonly IProductReadOnlyRepository _productReadOnlyRepository;
 
         public AddLineHandler(
             IOrderWriteRepository orderWriteRepository,
             IOrderReadOnlyRepository orderReadOnlyRepository,
             IUnitOfWork unitOfWork,
-            IOrderLineValidator orderLineValidator
-        )
+            IOrderLineValidator orderLineValidator,
+            IProductReadOnlyRepository productReadOnlyRepository)
         {
             _orderWriteRepository = orderWriteRepository;
             _orderReadOnlyRepository = orderReadOnlyRepository;
             _unitOfWork = unitOfWork;
             _orderLineValidator = orderLineValidator;
+            _productReadOnlyRepository = productReadOnlyRepository;
         }
 
         public async ValueTask<ResponseOrderDetailedDTO> Handle(
@@ -33,41 +35,36 @@ namespace BugStore.Application.Order.Handlers
             CancellationToken cancellationToken
         )
         {
-            await ValidateAsync(command.Request);
-
+            var request = command.Request;
+            await ValidateAsync(request);
             var order = await _orderReadOnlyRepository.GetByIdAsync(command.OrderId);
             if (order is null)
                 throw new NotFoundException(ResourceExceptionMessage.ORDER_NOT_FOUND);
+            var product = await _productReadOnlyRepository.GetByIdAsync(request.ProductId);
+            if (product is null)
+                throw new NotFoundException(ResourceExceptionMessage.PRODUCT_NOT_FOUND);
 
-            order!.AddLine(
-                command.Request.ProductId,
-                command.Request.Quantity,
-                command.Request.Price
-            );
-
+            order.AddLine(request.ProductId, request.Quantity, request.Price);
+            await _orderWriteRepository.AddLineAsync(order.Lines.Last());
             await _orderWriteRepository.UpdateAsync(order);
             await _unitOfWork.CommitAsync();
 
-            var updatedOrder = await _orderReadOnlyRepository.GetByIdAsync(command.OrderId);
-
             return new ResponseOrderDetailedDTO(
-                updatedOrder!.Id,
-                updatedOrder.CustomerId,
-                updatedOrder.CreatedAt,
-                updatedOrder.UpdatedAt,
-                updatedOrder
-                    .Lines.Select(l => new OrderLineDTO(
-                        l.ProductId,
-                        l.Quantity,
-                        l.Product.Price,
-                        l.Total
-                    ))
-                    .ToList(),
-                updatedOrder.Total
+                order.Id,
+                order.CustomerId,
+                order.CreatedAt,
+                order.UpdatedAt,
+                order.Lines.Select(x => new OrderLineDTO(
+                    x.ProductId,
+                    x.Quantity,
+                    request.Price,
+                    x.Total
+                )).ToList(),
+                order.Total
             );
-        }
 
-        private async Task ValidateAsync(RequestOrderLineDTO request)
+        }
+             async Task ValidateAsync(RequestOrderLineDTO request)
         {
             var validationResult = await _orderLineValidator.ValidateAsync(request);
             if (!validationResult.IsValid)
