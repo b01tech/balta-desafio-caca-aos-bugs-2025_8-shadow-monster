@@ -19,11 +19,29 @@ Neste processo eu aprendi:
 
 ## REGRAS DO DESAFIO
 
--   [ ] Realizar um fork do repositório do desafio
--   [ ] Criar um Workflow para branch main
--   [ ] Executar o build do projeto no Workflow
--   [ ] Executar o teste (Unit Test) do projeto no Workflow
--   [ ] Realizar o deployment automatizado da aplicação via CI/CD
+-   [x] Realizar um fork do repositório do desafio
+-   [x] Criar um Workflow para branch main
+-   [x] Executar o build do projeto no Workflow
+-   [x] Executar o teste (Unit Test) do projeto no Workflow
+-   [x] Realizar o deployment automatizado da aplicação via CI/CD
+
+---
+
+# ✅ DESAFIO CONCLUÍDO
+
+### 🚀 Deploy
+
+-   Hospedagem: **Azure Container Apps**
+-   Pipeline: **GitHub Actions**
+-   Imagem: build + push para **Azure Container Registry (ACR)**
+-   Atualização: `az containerapp update` com imagem e variáveis de ambiente
+-   Segredos: configurados em **GitHub Actions Secrets** (`AZURE_*`, `DATABASE_URL`)
+
+### 🔄 Fluxo do Pipeline
+
+-   Em `push` ou `pull request` para `main`:
+    -   Executa build e testes
+    -   Se aprovado, faz build da imagem, push para o ACR e deploy no Azure Container Apps
 
 ## 🏗️ Arquitetura e Tecnologias
 
